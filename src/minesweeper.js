@@ -11,6 +11,10 @@ const generatePlayerBoard = (numberOfRows, numberOfColumns) => {
   return board
 }
 
+const randomIndex = num => {
+  return Math.floor(Math.random() * num)
+}
+
 const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
   const board = []
   for (let i = 0; i < numberOfRows; i++) {
@@ -23,8 +27,11 @@ const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
 
   let numberOfBombsPlaced = 0
   while (numberOfBombsPlaced < numberOfBombs) {
-    const randomRowIndex = Math.floor(Math.random() * numberOfRows)
-    const randomColumnIndex = Math.floor(Math.random() * numberOfColumns)
+    let randomRowIndex, randomColumnIndex
+    do {
+      randomRowIndex = randomIndex(numberOfRows)
+      randomColumnIndex = randomIndex(numberOfColumns)
+    } while (board[randomRowIndex][randomColumnIndex] === 'B')
     board[randomRowIndex][randomColumnIndex] = 'B'
     numberOfBombsPlaced++
     // !!! The code in your while loop has the potential to place bombs on top of already existing bombs. This will be fixed when you learn about control flow.
