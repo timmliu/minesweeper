@@ -56,46 +56,46 @@ class Board {
       }).join('\n')
     )
   }
-}
 
-const generatePlayerBoard = (numberOfRows, numberOfColumns) => {
-  const board = []
-  for (let i = 0; i < numberOfRows; i++) {
-    const row = []
-    for (let j = 0; j < numberOfColumns; j++) {
-      row.push(" ")
+  static generatePlayerBoard(numberOfRows, numberOfColumns) {
+    const board = []
+    for (let i = 0; i < numberOfRows; i++) {
+      const row = []
+      for (let j = 0; j < numberOfColumns; j++) {
+        row.push(" ")
+      }
+      board.push(row)
     }
-    board.push(row)
-  }
-  console.log(board)
-  return board
-}
-
-const randomIndex = num => {
-  return Math.floor(Math.random() * num)
-}
-
-const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
-  const board = []
-  for (let i = 0; i < numberOfRows; i++) {
-    const row = []
-    for (let j = 0; j < numberOfColumns; j++) {
-      row.push(null)
-    }
-    board.push(row)
+    console.log(board)
+    return board
   }
 
-  let numberOfBombsPlaced = 0
-  while (numberOfBombsPlaced < numberOfBombs) {
-    let randomRowIndex = randomIndex(numberOfRows)
-    let randomColumnIndex = randomIndex(numberOfColumns)
-    if (board[randomRowIndex][randomColumnIndex] !== 'B') {
-      board[randomRowIndex][randomColumnIndex] = 'B'
-      numberOfBombsPlaced++
+  static generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs) {
+    const board = []
+    for (let i = 0; i < numberOfRows; i++) {
+      const row = []
+      for (let j = 0; j < numberOfColumns; j++) {
+        row.push(null)
+      }
+      board.push(row)
     }
-  }
 
-  return board
+    let numberOfBombsPlaced = 0
+    while (numberOfBombsPlaced < numberOfBombs) {
+      let randomRowIndex = randomIndex(numberOfRows)
+      let randomColumnIndex = randomIndex(numberOfColumns)
+      if (board[randomRowIndex][randomColumnIndex] !== 'B') {
+        board[randomRowIndex][randomColumnIndex] = 'B'
+        numberOfBombsPlaced++
+      }
+    }
+
+    function randomIndex(num) {
+      return Math.floor(Math.random() * num)
+    }
+
+    return board
+  }
 }
 
 const playerBoard = generatePlayerBoard(3,3)
