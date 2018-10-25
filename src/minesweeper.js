@@ -15,8 +15,8 @@ class Board {
   constructor(numberOfRows, numberOfColumns, numberOfBombs) {
     this._numberOfBombs = numberOfBombs
     this._numberOfTiles = numberOfRows * numberOfColumns
-    this._playerBoard = this.generatePlayerBoard(numberOfRows, numberOfColumns)
-    this._bombBoard = this.generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs)
+    this._playerBoard = Board.generatePlayerBoard(numberOfRows, numberOfColumns)
+    this._bombBoard = Board.generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs)
   }
 
   get playerBoard() {
@@ -70,7 +70,7 @@ class Board {
     console.log("Congratulations! You won!")
   }
 
-  generatePlayerBoard(numberOfRows, numberOfColumns) {
+  static generatePlayerBoard(numberOfRows, numberOfColumns) {
     const board = []
     for (let i = 0; i < numberOfRows; i++) {
       const row = []
@@ -83,7 +83,7 @@ class Board {
     return board
   }
 
-  generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs) {
+  static generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs) {
     const board = []
     for (let i = 0; i < numberOfRows; i++) {
       const row = []
