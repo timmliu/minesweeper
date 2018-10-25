@@ -38,6 +38,10 @@ class Board {
     })
     return numberOfBombs
   }
+
+  hasSafeTiles() {
+    return this._numberOfTiles !== this._numberOfBombs
+  }
 }
 
 const generatePlayerBoard = (numberOfRows, numberOfColumns) => {
