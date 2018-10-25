@@ -5,6 +5,9 @@ class Game {
 
   playMove(rowIndex, columnIndex) {
     this._board.flipTile(rowIndex, columnIndex)
+    if (this._board._playerBoard[rowIndex][columnIndex] === 'B') this._board.print()
+    else if (!this._board.hasSafeTiles) this._board.congratulate()
+    else this._board.print({prepend: "Current Board:"})
   }
 }
 
@@ -27,7 +30,7 @@ class Board {
     } else if (this._bombBoard[rowIndex][columnIndex] === 'B') {
       this._playerBoard[rowIndex][columnIndex] = 'B'
     } else {
-      this._playerBoard[rowIndex][columnIndex] = getNumberOfNeighborBombs(rowIndex, columnIndex)
+      this._playerBoard[rowIndex][columnIndex] = this.getNumberOfNeighborBombs(rowIndex, columnIndex)
     }
     this._numberOfTiles -= 1
   }
@@ -53,21 +56,21 @@ class Board {
     return this._numberOfTiles !== this._numberOfBombs
   }
 
-  print() {
+  print({ prepend } = { prepend: null }) {
+    if (typeof prepend === 'string') console.log(prepend + "\n")
+
     console.log(
       this._playerBoard.map(row => {
         return row.join(' | ')
       }).join('\n')
     )
-
-    console.log(
-      this._bombBoard.map(row => {
-        return row.join(' | ')
-      }).join('\n')
-    )
   }
 
-  static generatePlayerBoard(numberOfRows, numberOfColumns) {
+  congratulate() {
+    console.log("Congratulations! You won!")
+  }
+
+  generatePlayerBoard(numberOfRows, numberOfColumns) {
     const board = []
     for (let i = 0; i < numberOfRows; i++) {
       const row = []
@@ -80,7 +83,7 @@ class Board {
     return board
   }
 
-  static generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs) {
+  generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs) {
     const board = []
     for (let i = 0; i < numberOfRows; i++) {
       const row = []
@@ -108,14 +111,5 @@ class Board {
   }
 }
 
-const playerBoard = generatePlayerBoard(3,3)
-const bombBoard = generateBombBoard(3,3,3)
-
-console.log('Player Board: ')
-printBoard(playerBoard)
-console.log('Bomb Board: ')
-printBoard(bombBoard)
-
-flipTile(playerBoard, bombBoard, 0, 0)
-console.log('Updated Player Board:')
-console.log(playerBoard)
+const g = new Game(3, 3, 3)
+g.playMove(0, 0)
