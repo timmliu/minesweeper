@@ -19,5 +19,5 @@ game.playMove(1, 2);
 ## Todos:
 - auto-rebuild to /lib on /src save
 - one step new game
-- use bash prompts to make it easier to make moves
+- use prompts to make it easier to make moves: https://github.com/terkelg/prompts
 - winning or losing should start a new game automatically
