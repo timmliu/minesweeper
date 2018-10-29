@@ -15,3 +15,9 @@ game.playMove(1, 2);
 ## How to make updates to repo
 1. make changes in /src
 1. npm run build
+
+## Todos:
+- auto-rebuild to /lib on /src save
+- one step new game
+- use bash prompts to make it easier to make moves
+- winning or losing should start a new game automatically
